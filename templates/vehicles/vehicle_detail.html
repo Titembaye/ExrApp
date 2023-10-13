@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Véhicule Assuré</h3>
+<table class="table">
+    <tr>
+        <th class="col-4">Marque</th>
+        <td class="col-8">{{ vehicle.brand }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Immatriculation</th>
+        <td class="col-8">{{ vehicle.registration }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Puissance</th>
+        <td class="col-8">{{ vehicle.power }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Sièges</th>
+        <td class="col-8">{{ vehicle.seats }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Année de mise en service</th>
+        <td class="col-8">{{ vehicle.model_year }}</td>
+    </tr>
+</table>
+<h3>Client</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-2">Nom et prenoms</th>
+            <th class="col-2 text-center">Genre</th>
+            <th class="col-2 text-center">Téléphone 1</th>
+            <th class="col-2 text-center">Téléphone 2</th>
+            <th class="col-2 text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col-2">{{ client.full_name }}</td>
+            <td class="col-2 text-center">{{ client.gender }}</td>
+            <td class="col-2 text-center">{{ client.phone1 }}</td>
+            <td class="col-2 text-center">{{ client.phone2 }}</td>
+            <td class="col-2 text-center">
+                 <a href="{% url 'app_client:client_edit' client.id %}" class="settings" title="Modifier" data-toggle="tooltip">
+                    <i class="material-icons">&#xE8B8;</i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Contrat</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-2">Numéro de police</th>
+            <th class="col-2 text-center">Date d'enregistrement</th>
+            <th class="col-2 text-center">Prime TTC</th>
+            <th class="col-2 text-center">Prime Nette</th>
+            <th class="col-2 text-center">Commission</th>
+            <th class="col-2 text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col-2">{{ contract.policy_num }}</td>
+            <td class="col-2 text-center">{{ contract.register_date }}</td>
+            <td class="col-2 text-center">{{ contract.prime_ttc }}</td>
+            <td class="col-2 text-center">{{ contract.prime_net }}</td>
+            <td class="col-2 text-center">{{ contract.committee }}</td>
+            <td class="col-2 text-center">
+                 <a href="{% url 'app_contract:contract_edit' contract.id %}" class="settings" title="Modifier" data-toggle="tooltip">
+                    <i class="material-icons">&#xE8B8;</i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="col-2 text-center">
+    <a href="{% url 'app_vehicle:vehicle_list'%}" class="btn btn-primary btn-sm">Retour</a>
+</div>
+
+{% endblock %}

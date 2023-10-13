@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="get">
+    <div class="d-flex mb-3">
+        <div class="form-group ml-3">
+            <label for="registration"> Immatriculation: </label>
+            <input type="text" class="form-control" name="registration"  id="registration">
+        </div>
+
+        <div class="form-group ml-3">
+            <label for="owner_name">Nom du propriétaire:</label>
+            <input type="text" class="form-control" name="owner_name" id="owner_name">
+        </div>
+
+        <button type="submit" class="btn btn-primary ms-3">Rechercher</button>
+        <a href="{% url 'object:object_list' %}" class="btn btn-light ml-3">Réinitialiser</a>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th><a href="?sort_by=-id">ID</a></th>
+            <th><a href="?sort_by=type">Type</a></th>
+            <th><a href="?sort_by=brand">Marque</a></th>
+            <th><a href="?sort_by=registration">Immatriculation</a></th>
+            <th><a href="?sort_by=power">Puissance</a></th>
+            <th><a href="?sort_by=seats">Sièges</a></th>
+            <th><a href="?sort_by=model_year">Année du modèle</a></th>
+            <th><a href="?sort_by=client__fullName">Propriétaire</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for object in objects %}
+        <tr>
+            <td>{{ object.id }}</td>
+            <td>{{ object.type }}</td>
+            <td>{{ object.brand }}</td>
+            <td>{{ object.registration }}</td>
+            <td>{{ object.power }}</td>
+            <td>{{ object.seats }}</td>
+            <td>{{ object.model_year }}</td>
+            <td>{{ object.owner_name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

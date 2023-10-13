@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Prime par Catégorie</title>
+</head>
+<body>
+    <h1>Dashboard Prime par Catégorie</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Catégorie</th>
+                <th>Mois</th>
+                <th>Prime TTC</th>
+                <th>Prime HT</th>
+                <th>Prime Nette</th>
+                <th>Commission</th>
+                <th>Taux</th>
+                <th>Accessoires</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category, category_data in category_totals.items %}
+                {% for month, data in category_data.items %}
+                    <tr>
+                        {% if forloop.first %}
+                            <td rowspan="{{ category_data|length }}">{{ category }}</td>
+                        {% endif %}
+                        <td>{{ month }}</td>
+                        <td>{{ data.prime_ttc }}</td>
+                        <td>{{ data.prime_ht }}</td>
+                        <td>{{ data.prime_net }}</td>
+                        <td>{{ data.committee }}</td>
+                        <td>{{ data.rate }}</td>
+                        <td>{{ data.accessory }}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

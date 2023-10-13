@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Contrat</h3>
+<div class="d-flex justify-content-between">
+<table class="table col-md-5">
+    <tr>
+        <th class="col-4">Numéro de police</th>
+        <td class="col-8">{{ contract.policy_num }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Date d'enregistrement</th>
+        <td class="col-8">{{ contract.register_date }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Prime TTC</th>
+        <td class="col-8">{{ contract.prime_ttc }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Prime HT</th>
+        <td class="col-8">{{ contract.prime_ht }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Prime Nette</th>
+        <td class="col-8">{{ contract.prime_net }}</td>
+    </tr>
+
+    <tr>
+        <th class="col-4">Taux</th>
+        <td class="col-8">{{ contract.rate }}</td>
+    </tr>
+
+    </table>
+    <table class="table col-md-5">
+    <tr>
+        <th class="col-4">Commission</th>
+        <td class="col-8">{{ contract.committee }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Accessoires</th>
+        <td class="col-8">{{ contract.accessory }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Retenue</th>
+        <td class="col-8">{{ contract.detention }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Commission Finale</th>
+        <td class="col-8">{{ contract.final_com }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Date effective</th>
+        <td class="col-8">{{ contract.effect }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Echéance</th>
+        <td class="col-8">{{ contract.due_date }}</td>
+    </tr>
+</table>
+</div>
+<h3>Assurance Automobile</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-3">Marque</th>
+            <th class="col-2 text-center">Immatriculation</th>
+            <th class="col-2 text-center">Marque</th>
+            <th class="col-2 text-center">Puissance</th>
+            <th class="col-3 text-center">Capacité</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col-3">{{ vehicle.brand }}</td>
+            <td class="col-2 text-center">{{ vehicle.registration }}</td>
+            <td class="col-2 text-center">{{ vehicle.brand }}</td>
+            <td class="col-2 text-center">{{ vehicle.power }}</td>
+            <td class="col-3 text-center">{{ vehicle.seats }}</td>
+
+        </tr>
+    </tbody>
+</table>
+<h3> Assurance Vie</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-2 ">Genre</th>
+            <th class="col-3 text-center">Nom et prénoms</th>
+            <th class="col-2 text-center">Naissance</th>
+            <th class="col-2 text-center">Téléphone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col-2">{{ person.gender }}</td>
+            <td class="col-3 text-center">{{ person.full_name }}</td>
+            <td class="col-2 text-center">{{ person.birthday }}</td>
+            <td class="col-2 text-center">{{ person.phone }}</td>
+        </tr>
+    </tbody>
+</table>
+<h3> Assurance Dommage</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-3">description</th>
+            <th class="col-2 text-center">Commentaire</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col-3">{{ other.description }}</td>
+            <td class="col-2 text-center">{{ other.comment }}</td>
+        </tr>
+    </tbody>
+</table>
+<div class="col-2 text-center">
+    <a href="{% url 'app_contract:contract_list'%}" class="btn btn-primary btn-sm">Retour</a>
+</div>
+
+{% endblock %}

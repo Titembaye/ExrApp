@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+<div class="container-xl">
+    <div class="container-xl">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title" style="background-color: #284898; padding: 5px 2px;">
+                    <div class="d-flex justify-content-between py-2">
+                        <h2 class="text-white">Tableau de bord Assurances Auto</h2>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>Mois</th>  <!-- Cellule vide pour l'en-tête de la première colonne -->
+                        {% for month, totals in vehicle_data.items %}
+                            <th>{{ month }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>Prime TTC</th>  <!-- En-tête de la première ligne -->
+                        {% for month, totals in vehicle_data.items %}
+                            <td>{{ totals.total_prime_ttc }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>Prime HT</th>  <!-- En-tête de la première ligne -->
+                        {% for month, totals in monthly_totals.items %}
+                            <td>{{ totals.total_prime_ht }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>Prime Nette</th>  <!-- En-tête de la première ligne -->
+                        {% for month, totals in vehicle_data.items %}
+                            <td>{{ totals.total_prime_net }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>Accessoires</th>  <!-- En-tête de la première ligne -->
+                        {% for month, totals in monthly_totals.items %}
+                            <td>{{ totals.total_accessoires }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>Taux</th>  <!-- En-tête de la première ligne -->
+                        {% for month, totals in monthly_totals.items %}
+                            <td>{{ totals.total_taux }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>Commissions</th>  <!-- En-tête de la première ligne -->
+                        {% for month, totals in monthly_totals.items %}
+                            <td>{{ totals.total_commission }}</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

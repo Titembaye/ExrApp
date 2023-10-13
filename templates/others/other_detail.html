@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Assuré</h3>
+<table class="table">
+    <tr>
+        <th class="col-4">Description</th>
+        <td class="col-8">{{ other.description }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Commentaire</th>
+        <td class="col-8">{{ other.comment }}</td>
+    </tr>
+</table>
+<h3>Client</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-2">Genre</th>
+            <th class="col-6 text-center">Nom et Prénoms</th>
+            <th class="col-2 text-center">Téléphone</th>
+            <th class="col-2 text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col-2">{{ client.gender }}</td>
+            <td class="col-6 text-center">{{ client.full_name|truncatechars:35 }}</td>
+            <td class="col-2 text-center">{{ client.phone1 }}</td>
+            <td class="col-2 text-center">
+                 <a href="{% url 'app_contract:contract_edit' contract.id %}" class="settings" title="Modifier" data-toggle="tooltip">
+                    <i class="material-icons">&#xE8B8;</i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3>Contrat</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-2">Numero de police</th>
+            <th class="col-2 text-center">Garantie</th>
+            <th class="col-2 text-center">Prime TTC</th>
+            <th class="col-2 text-center">Prime Nette</th>
+            <th class="col-2 text-center">Prime HT</th>
+            <th class="col-2 text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contract in other.contract_set.all %}
+        <tr>
+            <td class="col-2">{{ contract.policy_num|truncatechars:25 }}</td>
+            <td class="col-2 text-center">{{ contract.guaranttee }}</td>
+            <td class="col-2 text-center">{{ contract.prime_ttc }}</td>
+            <td class="col-2 text-center">{{ contract.prime_net }}</td>
+            <td class="col-2 text-center">{{ contract.prime_ht }}</td>
+            <td class="col-2 text-center">
+                 <a href="{% url 'app_contract:contract_edit' contract.id %}" class="settings" title="Modifier" data-toggle="tooltip">
+                    <i class="material-icons">&#xE8B8;</i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="col-2 text-center">
+    <a href="{% url 'app_dommage:other_list'%}" class="btn btn-primary btn-sm">Retour</a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#id_date_field").datepicker();
+    });
+</script>
+{% endblock %}

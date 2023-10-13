@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Informations sur client</h3>
+<table class="table">
+    <tr>
+        <th class="col-4">Nom et prénoms</th>
+        <td class="col-8">{{ client.full_name }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Genre</th>
+        <td class="col-8">{{ client.gender }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Téléphone 1</th>
+        <td class="col-8">{{ client.phone1 }}</td>
+    </tr>
+    <tr>
+        <th class="col-4">Téléphone 2</th>
+        <td class="col-8">{{ client.phone2 }}</td>
+    </tr>
+</table>
+<div class=" d-flex justify-content-between mb-1">
+    <h3>Contrats</h3>
+    <a href="{% url 'app_contract:contract_add' %}" class="btn btn-primary btn-sm">Ajouter un contrat</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-2">Numéro de police</th>
+            <th class="col-2 text-center">Garantie</th>
+            <th class="col-2 text-center">Prime TTC</th>
+            <th class="col-2 text-center">Prime Nette</th>
+            <th class="col-2 text-center">Prime HT</th>
+            <th class="col-2 text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contract in contracts %}
+        <tr>
+            <td class="col-2">{{ contract.policy_num }}</td>
+            <td class="col-2 text-center">{{ contract.guaranttee }}</td>
+            <td class="col-2 text-center">{{ contract.prime_ttc }}</td>
+            <td class="col-2 text-center">{{ contract.prime_net }}</td>
+            <td class="col-2 text-center">{{ contract.prime_ht }}</td>
+            <td class="col-2 text-center">
+                 <a href="{% url 'app_contract:contract_detail' contract.id %}" class="details" title="Détails" data-toggle="tooltip">
+                    <i class="material-icons">&#xE8F4;</i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="col-2 text-center">
+    <a href="{% url 'app_client:client_list'%}" class="btn btn-primary btn-sm">Retour</a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Ajoutez votre code JavaScript ici, le cas échéant
+    });
+</script>
+{% endblock %}

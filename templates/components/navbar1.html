@@ -1,0 +1,77 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+  <div class="d-flex">
+    <img src="{% static 'images/logo.png' %}" height="40px">
+    <button class="navbar-toggler bg-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto custom-nav-links ">
+         <li class="nav-item ">
+          <a class="nav-link text-white" href="{% url 'app_contract:contract_list' %}">ACCUEIL</a>
+        </li>
+        <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+          <a class="nav-link text-white" href="{% url 'app_contract:base_dashboard' %}">TABLEAU DE BORD</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white {% if navbar == 'client' %} active {% endif %} " href="{% url 'app_client:client_list' %}">CLIENT</a>
+        </li>
+        <li class="nav-item">
+          <div class="dropdown">
+            <button class="btn text-white dropdown-toggle" style="padding-left:0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              ASSURANCES
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="nav-link {% if navbar == 'vehicle' %} active {% endif %}" style="color:#284898" href="{% url 'app_vehicle:vehicle_list' %}">AUTOS</a>
+              <a class="nav-link {% if navbar == 'person' %} active {% endif %}" style="color:#284898" href="{% url 'app_person:person_list' %}">VIE</a>
+              <a class="nav-link {% if navbar == 'dommage' %} active {% endif %}" style="color:#284898" href="{% url 'app_dommage:other_list' %}">DOMMAGES</a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            CONTRATS
+          </a>
+          <ul class="dropdown-menu multi" aria-labelledby="navbarDropdown">
+            <li class="dropdown-submenu">
+              <a href="{% url 'app_contract:contract_list' %}" class="dropdown-item dropdown-toggle" style="color:#284898">TOUS LES CONTRATS</a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-item">
+                  <a class="nav-link dropdown-item {% if navbar == 'expirant' %} active {% endif %}" style="color:#284898" href="{% url 'app_contract:expiring_contract' %}">EXPIRANTS</a>
+                </li>
+                <li class="dropdown-item">
+                  <a class="nav-link dropdown-item {% if navbar == 'expired' %} active {% endif %}" style="color:#284898" href="{% url 'app_contract:expired_contracts' %}">EXPIRES</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown-submenu">
+              <a class="nav-link dropdown-item {% if navbar == 'sanlam' %} active {% endif %}" style="color:#284898" href="{% url 'app_contract:sanlam_contracts' %}">SANLAM</a>
+            </li>
+            <li class="dropdown-submenu">
+              <a class="nav-link dropdown-item {% if navbar == 'nsia' %} active {% endif %}" style="color:#284898" href="{% url 'app_contract:nsia_contracts' %}">NSIA</a>
+            </li>
+            <li class="dropdown-submenu">
+              <a class="nav-link dropdown-item {% if navbar == 'fidelia' %} active {% endif %}" style="color:#284898" href="{% url 'app_contract:fidelia_contracts' %}">FIDELIA</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <div class="dropdown">
+            <button class="btn text-white dropdown-toggle" style="padding-left:0" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              PARAMETRES
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+              <a class="nav-link {% if navbar == 'compagnie' %} active {% endif %}" style="color:#284898" href="{% url 'app_setting:company_list' %}">SOCIETES</a>
+              <a class="nav-link {% if navbar == 'garantie' %} active {% endif %}" style="color:#284898" href="{% url 'app_setting:guaranttee_list' %}">GARANTIES</a>
+              <a class="nav-link {% if navbar == 'type' %} active {% endif %}" style="color:#284898" href="{% url 'app_setting:type_list' %}">TYPES</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="d-flex">
+    <a class="nav-link custom-text-color" href="{% url 'app_client:client_list' %}">logout</a>
+  </div>
+</nav>

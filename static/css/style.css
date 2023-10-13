@@ -1,0 +1,29 @@
+/* Style pour la barre de navigation principale */
+.custom-navbar {
+  background-color: #333; /* Couleur d'arrière-plan */
+  color: #fff; /* Couleur du texte */
+}
+
+/* Style pour les liens dans la barre de navigation */
+.custom-nav-links .nav-link {
+  color: #fff; /* Couleur du texte */
+  padding: 10px 20px; /* Espacement du texte par rapport aux bords */
+  transition: background-color 0.3s; /* Transition en douceur de la couleur de fond */
+}
+
+/* Style pour les liens actifs */
+.custom-nav-links .nav-item.active .nav-link {
+  background-color: #007bff; /* Couleur de fond pour le lien actif */
+  color: #fff; /* Couleur du texte pour le lien actif */
+}
+
+/* Style pour le lien de déconnexion */
+.nav-link.custom-text-color {
+  color: #fff; /* Couleur du texte pour le lien de déconnexion */
+  margin-right: 20px; /* Espacement à droite du lien de déconnexion */
+}
+
+/* Style pour le lien de déconnexion au survol */
+.nav-link.custom-text-color:hover {
+  text-decoration: underline; /* Souligner le lien au survol */
+}

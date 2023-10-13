@@ -1,0 +1,121 @@
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+    <div class="d-flex justify-content-between align-items-center">
+        <h4 class="ps-3">Répartition des garanties dans les contrats</h4>
+        <h4><a href="{% url 'app_contract:dashboard_prime' %}">Page 2</a></h4>
+    </div>
+        <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Compagnie</th>
+                    <th>Total Prime TTC</th>
+                    <th>Pourcentage</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <!-- Les données du tableau seront ajoutées ici par JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <canvas id="myChart" width="50" height="20" ></canvas>
+</div>
+
+<!-- Ajoutez le script Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    function initializeChart() {
+        // Données pour Chart.js
+        const companyLabels = {{ company_labels|safe }};
+        const totalPrimes = {{total_prime_ttc_data|to_js_decimal|safe }};
+        const floatTotalPrimes = totalPrimes.map(value => parseFloat(value));
+
+        // Créer le graphique Chart.js
+        const ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar', // Utilisez le type de graphique approprié (bar, line, pie, etc.)
+            data: {
+                labels: companyLabels,
+                datasets: [{
+                    label: 'Total Primes TTC',
+                    data: floatTotalPrimes, // Utilisez les valeurs float ici
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Couleur de fond des barres
+                    borderColor: 'rgba(75, 192, 192, 1)', // Couleur de la bordure des barres
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero:true
+                    }
+                }
+            }
+        });
+
+        // Remplir le tableau avec les données
+        const tableBody = document.getElementById('table-body');
+        for (let i = 0; i < companyLabels.length; i++) {
+            const row = document.createElement('tr');
+            const companyNameCell = document.createElement('td');
+            const totalPrimeCell = document.createElement('td');
+            const percentageCell = document.createElement('td');
+
+            companyNameCell.textContent = companyLabels[i];
+            totalPrimeCell.textContent = totalPrimes[i].toFixed(2); // Formatage des décimales
+            const percentage = (floatTotalPrimes[i] / floatTotalPrimes.reduce((a, b) => a + b, 0)) * 100;
+            percentageCell.textContent = percentage.toFixed(2) + '%';
+
+            row.appendChild(companyNameCell);
+            row.appendChild(totalPrimeCell);
+            row.appendChild(percentageCell);
+            tableBody.appendChild(row);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeChart);
+</script>
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Chiffres Mensuels</title>
+</head>
+<body>
+    <h1>Chiffres Mensuels pour l'année {{ annee }}</h1>
+   <table>
+  <thead>
+    <tr>
+      <th>Mois</th>
+      <th>Total Prime TTC</th>
+      <th>Nouvelle Affaire</th>
+      <th>Renouvellement</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for resultat in resultats %}
+    <tr>
+      <td>{{ resultat.mois }}</td>
+      <td>{{ resultat.total_prime_ttc }}</td>
+      <td>{% if resultat.Nouvelle_affaire %}<span style="color: green; font-weight: bold;">{{ resultat.Nouvelle_affaire }}</span>{% else %}0{% endif %}
+      </td>
+      <td>{% if resultat.Renouvellement %}<span style="color: red; font-weight: bold;">{{ resultat.Renouvellement }}</span>{% else %}0{% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+</body>
+</html>
+

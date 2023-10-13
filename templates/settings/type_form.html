@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    <h2>
+        {% if form.instance.pk %}
+            Modification du Type d'assurance
+        {% else %}
+            Enregistrement d'un nouveau Type d'assurance
+        {% endif %}
+    </h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.libelle.id_for_label }}" class="">{{ form.libelle.label }}</label>
+            {{ form.libelle }}
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" style="background-color: #e42320; border-color: #e42320;">Enregistrer</button>
+
+        <a href="{% url 'app_setting:type_list' %}" class="btn btn-secondary" style="background-color: #6c757d;">Annuler</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Ajouter un nouveau contrat</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <table class="table">
+        <tr>
+            <td>
+                <div class="col-md-12">
+                    {{ form.policy.label_tag }}
+                    {{ form.policy }}
+                </div>
+            </td>
+            <td>
+                <div class="col-md-12">
+                    {{ form.insurance_object.label_tag }}
+                    {{ form.insurance_object }}
+                </div>
+            </td>
+            <td>
+                <div class="col-md-12">
+                    {{ form.renewal.label_tag }}
+                    {{ form.renewal }}
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="col-md-12">
+                    {{ form.policy_num.label_tag }}
+                    {{ form.policy_num }}
+                </div>
+            </td>
+            <td>
+                <div class="col-md-12">
+                    {{ form.amendement.label_tag }}
+                    {{ form.amendement }}
+                </div>
+            </td>
+            <td>
+                <div class="col-md-12">
+                    {{ form.register_date.label_tag }}
+                    {{ form.register_date }}
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+
+            <td>
+                <div class="col-md-12">
+                    {{ form.prime_ttc.label_tag }}
+                    {{ form.prime_ttc }}
+                </div>
+            </td>
+            <td>
+                <div class="col-md-12">
+                    {{ form.prime_ht.label_tag }}
+                    {{ form.prime_ht }}
+                </div>
+            </td>
+            <td>
+                <div class="col-md-12">
+                    {{ form.prime_net.label_tag }}
+                    {{ form.prime_net }}
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="col-md-12">
+                    {{ form.committee.label_tag }}
+                    {{ form.committee }}
+                </div>
+            </td>
+            <td>
+                <div class="col-md-12">
+                    {{ form.detention.label_tag }}
+                    {{ form.detention }}
+                </div>
+            </td>
+            <td>
+                <div class="col-md-12">
+                    {{ form.final_com.label_tag }}
+                    {{ form.final_com }}
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="col-md-12">
+                    {{ form.effect.label_tag }}
+                    {{ form.effect }}
+                </div>
+            </td>
+            <td>
+                <div class="col-md-12">
+                    {{ form.due_date.label_tag }}
+                    {{ form.due_date }}
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <button type="submit" class="btn btn-primary" style="background-color: #e42320; border-color: #e42320;">Enregistrer</button>
+</form>
+
+{% endblock %}

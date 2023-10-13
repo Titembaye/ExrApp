@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <form method="get" class="d-flex">
+                    <input type="text" name="q" placeholder="Rechercher par nom" class="form-control me-2">
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                </form>
+                <div class="ms-2">
+                    <a href="{% url 'client:client_list' %}" class="btn btn-secondary me-2">Réinitialiser</a>
+                    <a href="{% url 'client:client_list' %}?sort_by=fullName" class="btn btn-secondary me-2">Tri par nom</a>
+                </div>
+            </div>
+            <div class="table-title">
+                <h2>Liste des Clients</h2>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Téléphone 1</th>
+                        <th scope="col">Téléphone 2</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                        <tr>
+                          <td>{{ client.full_name }}</td>
+                          <td>{{ client.gender }}</td>
+                          <td>{{ client.phone1 }}</td>
+                          <td>{{ client.phone2 }}</td>
+                          <td>
+                            <a href="{% url 'client:client_detail' client.id %}" class="btn btn-primary btn-sm">Détails</a>
+                            <a href="{% url 'client:client_edit' client.id %}" class="btn btn-warning btn-sm">Modifier</a>
+                          </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="clearfix">
+                <div class="hint-text">Affichage de <b>{{ clients|length }}</b> clients sur <b>{{ clients_count }}</b> au total</div>
+                <ul class="pagination">
+                    <li class="page-item disabled"><a href="#">Précédent</a></li>
+                    {% for page in clients.paginator.page_range %}
+                        {% if clients.number == page %}
+                            <li class="page-item active"><a href="#" class="page-link">{{ page }}</a></li>
+                        {% else %}
+                            <li class="page-item"><a href="{{ clients.url }}?page={{ page }}" class="page-link">{{ page }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    <li class="page-item"><a href="#" class="page-link">Suivant</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

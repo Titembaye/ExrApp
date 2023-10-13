@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    <h2>
+        {% if form.instance.pk %}
+            Modification du client
+        {% else %}
+            Enregistrement d'un nouveau client
+        {% endif %}
+    </h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="{{ form.gender.id_for_label }}" >{{ form.gender.label }}</label>
+            {{ form.gender }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.full_name.id_for_label }}" >{{ form.full_name.label }}</label>
+            {{ form.full_name }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.birthday.id_for_label }}"> Date de naissance </label>
+            {{ form.birthday }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.phone.id_for_label }}" >{{ form.phone.label }}</label>
+            {{ form.phone }}
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" style="background-color: #e42320; border-color: #e42320;">Enregistrer</button>
+
+        <a href="{% url 'app_person:person_list' %}" class="btn btn-secondary" style="background-color: #6c757d;">Annuler</a>
+    </form>
+</div>
+{% endblock %}

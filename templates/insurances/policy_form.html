@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    <h2>
+        {% if form.instance.pk %}
+            Modification du contrat
+        {% else %}
+            Enregistrement d'un nouveau contrat
+        {% endif %}
+    </h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group pt-4">
+            <label for="{{ form.guaranttee.id_for_label }}">Guarantie</label>
+            {{ form.guaranttee }}
+            {{ form.guaranttee.errors }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.rate.id_for_label }}">Taux</label>
+            {{ form.rate }}
+            {{ form.rate.errors }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.accessory.id_for_label }}">Accessoire</label>
+            {{ form.accessory }}
+            {{ form.accessory.errors }}
+        </div>
+        <button type="submit" class="btn btn-primary" style="background-color: #e42320; border-color: #e42320;">Enregistrer</button>
+        <a href="{% url 'app_contract:contract_list' %}" class="btn btn-secondary" style="background-color: #6c757d;">Annuler</a>
+    </form>
+</div>
+{% endblock %}

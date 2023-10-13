@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+<h2>
+    {% if form.instance.pk %}
+        Modification de l'objet
+    {% else %}
+        Enregistrement d'un nouveau Véhicule
+    {% endif %}
+</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="{{ form.brand.id_for_label }}" >{{ form.brand.label }}</label>
+        {{ form.brand }}
+        {{ form.brand.errors }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.registration.id_for_label }}" >{{ form.registration.label }}</label>
+        {{ form.registration }}
+        {{ form.registration.errors }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.power.id_for_label }}" >{{ form.power.label }}</label>
+        {{ form.power }}
+        {{ form.power.errors }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.seats.id_for_label }}" >{{ form.seats.label }}</label>
+        {{ form.seats }}
+        {{ form.seats.errors }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.model_year.id_for_label }}" >{{ form.model_year.label }}</label>
+        {{ form.model_year }}
+        {{ form.model_year.errors }}
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="background-color: #e42320; border-color: #e42320;">Enregistrer</button>
+    <a href="{% url 'app_vehicle:vehicle_list' %}" class="btn btn-secondary" style="background-color: #6c757d;">Annuler</a>
+</form>
+</div>
+{% endblock %}

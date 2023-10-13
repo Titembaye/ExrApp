@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-8 offset-md-2">
+    <h2>
+        {% if form.instance.pk %}
+            Modification du contrat
+        {% else %}
+            Enregistrement d'un nouveau contrat
+        {% endif %}
+    </h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ form.policy_num.id_for_label }}">Numéro de police</label>
+                    {{ form.policy_num }}
+                    {{ form.policy_num.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.effect.id_for_label }}">Date de début</label>
+                    {{ form.effect }}
+                    {{ form.effect.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.prime_ttc.id_for_label }}">Prime TTC</label>
+                    {{ form.prime_ttc }}
+                    {{ form.prime_ttc.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.rate.id_for_label }}">Taux</label>
+                    {{ form.rate }}
+                    {{ form.rate.errors }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.guaranttee.id_for_label }}">Guarantie</label>
+                    {{ form.guaranttee }}
+                    {{ form.guaranttee.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.company.id_for_label }}">Compagnie</label>
+                    {{ form.company }}
+                    {{ form.company.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.client.id_for_label }}">Client</label>
+                    {{ form.client }}
+                    {{ form.client.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.other.id_for_label }}">Dommage</label>
+                    {{ form.other }}
+                    {{ form.other.errors }}
+                </div>
+
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label for="{{ form.register_date.id_for_label }}">Date d'enregistrement</label>
+                    {{ form.register_date }}
+                    {{ form.register_date.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.due_date.id_for_label }}">Echéance</label>
+                    {{ form.due_date }}
+                    {{ form.due_date.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.prime_net.id_for_label }}">Prime Nette</label>
+                    {{ form.prime_net }}
+                    {{ form.prime_net.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.accessory.id_for_label }}">Accessoires</label>
+                    {{ form.accessory }}
+                    {{ form.accessory.errors }}
+                </div>
+
+
+                <div class="form-group">
+                    <label for="{{ form.type_contract.id_for_label }}">Type de contrat</label>
+                    {{ form.type_contract }}
+                    {{ form.type.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.agent.id_for_label }}">Agent</label>
+                    {{ form.agent }}
+                    {{ form.agent.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.person.id_for_label }}">Personne</label>
+                    {{ form.person }}
+                    {{ form.person.errors }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.vehicle.id_for_label }}">Véhicule</label>
+                    {{ form.vehicle }}
+                    {{ form.vehicle.errors }}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="{{ form.assured.id_for_label }}">Commentaire</label>
+                    {{ form.assured }}
+                    {{ form.assured.errors }}
+                </div>
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <a href="{% url 'app_contract:contract_list' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% if form.errors %}
+<div class="col-md-6 offset-md-3">
+    <div class="alert alert-danger">
+        <strong>Erreurs:</strong>
+        <ul>
+            {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+            <li>{{ field }}: {{ error }}</li>
+            {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
+<script>
+    $(document).ready(function () {
+        // Fonction de filtrage en temps réel
+        function applyRealTimeFilter(inputField, optionsList) {
+            inputField.on('input', function () {
+                var searchText = $(this).val().toLowerCase();
+
+                // Réinitialisez les options du champ de sélection
+                optionsList.find('option').each(function () {
+                    var optionText = $(this).text().toLowerCase();
+
+                    // Affichez ou masquez les options en fonction de la saisie de l'utilisateur
+                    if (optionText.includes(searchText)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        }
+
+        // Appliquez la fonction de filtrage en temps réel à tous les champs de sélection nécessaires
+        applyRealTimeFilter($('#id_client-search'), $('#id_client option'));
+        applyRealTimeFilter($('#id_other-search'), $('#id_other option'));
+        applyRealTimeFilter($('#id_guaranttee-search'), $('#id_guaranttee option'));
+        applyRealTimeFilter($('#id_person-search'), $('#id_person option'));
+        applyRealTimeFilter($('#id_vehicle-search'), $('#id_vehicle option'));
+    });
+</script>
+
+{% endblock %}
